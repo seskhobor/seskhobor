@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seskhobor - বাংলার প্রাণের সংবাদ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a73e8;
+            --secondary: #0d47a1;
+            --accent: #e91e63;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --gray: #5f6368;
+            --border: #dadce0;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.7;
+            direction: ltr;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: #ffd700;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .search-container input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-container button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 0 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .search-container button:hover {
+            background: #c2185b;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: opacity 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .breaking-news {
+            background: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .breaking-news span {
+            background: #d84315;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .news-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .news-excerpt {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .widget {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .widget-header {
+            padding: 15px 20px;
+            background: var(--secondary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .widget-content {
+            padding: 20px;
+        }
+        
+        .archive-list {
+            list-style: none;
+        }
+        
+        .archive-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .archive-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .archive-list a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.3s;
+        }
+        
+        .archive-list a:hover {
+            color: var(--primary);
+        }
+        
+        .archive-list span {
+            background: var(--light);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category {
+            background: var(--light);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .category:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .upload-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        .upload-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 10px;
+        }
+        
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        .pagination button:hover, 
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc1c6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #3c4043;
+            color: #9aa0a6;
+        }
+        
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Bangla specific styles */
+        .bangla-text {
+            font-family: 'Hind Siliguri', sans-serif;
+            line-height: 1.8;
+        }
+        
+        .bangla-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        
+        .bangla-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span class="bangla-text">seskhobor</span>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="খবর খুঁজুন...">
+                <button id="search-btn"><i class="fas fa-search"></i> অনুসন্ধান</button>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">মূল পাতা</a></li>
+                    <li><a href="#">সর্বশেষ</a></li>
+                    <li><a href="#">রাজনীতি</a></li>
+                    <li><a href="#">খেলাধুলা</a></li>
+                    <li><a href="#">বিনোদন</a></li>
+                    <li><a href="#">আন্তর্জাতিক</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="main-content">
+            <div class="section-header">
+                <div class="section-title bangla-text">সর্বশেষ খবর</div>
+                <div class="section-actions">
+                    <button id="toggle-view"><i class="fas fa-th-list"></i> গ্রিড ভিউ</button>
+                </div>
+            </div>
+            
+            <div class="breaking-news bangla-text">
+                <i class="fas fa-bolt"></i>
+                <span>ব্রেকিং নিউজ</span>
+                <div class="bangla-text">বাজেট অধিবেশনে বিরোধী দলগুলোর ওয়াকআউট, সংসদে উত্তপ্ত বিতর্ক</div>
+            </div>
+            
+            <div class="news-grid">
+                <!-- News cards will be generated here -->
+            </div>
+            
+            <div class="pagination">
+                <button class="active">১</button>
+                <button>২</button>
+                <button>৩</button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="widget">
+                <div class="widget-header bangla-text">খবরের বিভাগ</div>
+                <div class="widget-content categories">
+                    <div class="category active bangla-text">সকল খবর</div>
+                    <div class="category bangla-text">রাজনীতি</div>
+                    <div class="category bangla-text">খেলাধুলা</div>
+                    <div class="category bangla-text">বিনোদন</div>
+                    <div class="category bangla-text">অর্থনীতি</div>
+                    <div class="category bangla-text">আন্তর্জাতিক</div>
+                    <div class="category bangla-text">স্বাস্থ্য</div>
+                    <div class="category bangla-text">প্রযুক্তি</div>
+                </div>
+            </div>
+            
+            <div class="widget">
+                <div class="widget-header bangla-text">খবরের আর্কাইভ</div>
+                <div class="widget-content">
+                    <ul class="archive-list">
+                        <li><a href="#" class="bangla-text">আগস্ট ২০২৩ <span>২৪</span></a></li>
+                        <li><a href="#" class="bangla-text">জুলাই ২০২৩ <span>৩১</span></a></li>
+                        <li><a href="#" class="bangla-text">জুন ২০২৩ <span>২৮</span></a></li>
+                        <li><a href="#" class="bangla-text">মে ২০২৩ <span>৩০</span></a></li>
+                        <li><a href="#" class="bangla-text">এপ্রিল ২০২৩ <span>২৬</span></a></li>
+                        <li><a href="#" class="bangla-text">মার্চ ২০২৩ <span>২৯</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="widget">
+                <div class="widget-header bangla-text">খবর আপলোড করুন</div>
+                <div class="widget-content">
+                    <form class="upload-form">
+                        <div class="form-group">
+                            <label for="title" class="bangla-text">শিরোনাম</label>
+                            <input type="text" id="title" placeholder="খবরের শিরোনাম লিখুন">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category" class="bangla-text">বিভাগ</label>
+                            <select id="category">
+                                <option value="">বিভাগ নির্বাচন করুন</option>
+                                <option value="রাজনীতি">রাজনীতি</option>
+                                <option value="খেলাধুলা">খেলাধুলা</option>
+                                <option value="বিনোদন">বিনোদন</option>
+                                <option value="আন্তর্জাতিক">আন্তর্জাতিক</option>
+                                <option value="অর্থনীতি">অর্থনীতি</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="content" class="bangla-text">বিস্তারিত</label>
+                            <textarea id="content" placeholder="খবরের বিস্তারিত লিখুন..."></textarea>
+                        </div>
+                        
+                        <button type="button" class="upload-btn bangla-text"><i class="fas fa-upload"></i> খবর আপলোড করুন</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-header bangla-text">জনপ্রিয় খবর</div>
+                <div class="widget-content">
+                    <ul class="archive-list">
+                        <li><a href="#" class="bangla-text">বাজেট অধিবেশনে ওয়াকআউট, উত্তপ্ত সংসদ</a></li>
+                        <li><a href="#" class="bangla-text">মুদ্রাস্ফীতি ৯.৬৯ শতাংশে উন্নীত</a></li>
+                        <li><a href="#" class="bangla-text">আসছে ৫জি নেটওয়ার্ক, প্রস্তুতি শেষ</a></li>
+                        <li><a href="#" class="bangla-text">বাংলাদেশ-ভারত ক্রিকেট সিরিজের সূচি ঘোষণা</a></li>
+                        <li><a href="#" class="bangla-text">নতুন সিনেমা 'প্রেমের ফুল' মুক্তির তারিখ ঘোষণা</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 class="bangla-text">seskhobor</h3>
+                <p class="bangla-text">বাংলার সেরা অনলাইন নিউজ পোর্টাল, যেখানে আপনি পাচ্ছেন সর্বশেষ ও নির্ভরযোগ্য খবর। আমাদের প্রতিশ্রুতি সত্য ও ন্যায়ভিত্তিক সাংবাদিকতা।</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="bangla-text">দ্রুত লিংক</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="bangla-text">মূল পাতা</a></li>
+                    <li><a href="#" class="bangla-text">আমাদের সম্পর্কে</a></li>
+                    <li><a href="#" class="bangla-text">যোগাযোগ</a></li>
+                    <li><a href="#" class="bangla-text">গোপনীয়তা নীতি</a></li>
+                    <li><a href="#" class="bangla-text">শর্তাবলী</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="bangla-text">বিভাগসমূহ</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="bangla-text">রাজনীতি</a></li>
+                    <li><a href="#" class="bangla-text">খেলাধুলা</a></li>
+                    <li><a href="#" class="bangla-text">বিনোদন</a></li>
+                    <li><a href="#" class="bangla-text">অর্থনীতি</a></li>
+                    <li><a href="#" class="bangla-text">আন্তর্জাতিক</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="bangla-text">যোগাযোগ করুন</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> info@seskhobor.com</li>
+                    <li><i class="fas fa-phone"></i> +৮৮০ ১৯১২ ৩৪৫৬৭৮</li>
+                    <li><i class="fas fa-map-marker-alt"></i> ১২৩ প্রেস স্ট্রিট, ঢাকা</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright bangla-text">
+            &copy; ২০২৫ seskhobor। সর্বস্বত্ব সংরক্ষিত।
+        </div>
+    </footer>
+    
+    <script>
+        // --- CONFIG: আপনার Apps Script Web App URL এখানে বসাবেন ---
+        const API_URL = "YOUR_APPS_SCRIPT_WEBAPP_URL_HERE"; // <-- **এখানে** আপনার Apps Script exec URL দিন
+
+        // local fallback (কাজ না করলে বা ডেভেলপমেন্টে) এমন sample থাকবে না — সবসময় API-ই রেন্ডার করবে
+        let newsData = [];
+
+        // DOM Elements
+        const newsGrid = document.querySelector('.news-grid');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const categoryButtons = document.querySelectorAll('.category');
+        const archiveList = document.querySelector('.archive-list');
+        const uploadBtn = document.querySelector('.upload-btn');
+
+        // Safe image URL (Google Drive লিংক থাকলে uc link বানাবে)
+        function safeImageUrl(raw, idFallback) {
+            if (!raw) return `https://picsum.photos/600/400?random=${idFallback || Math.floor(Math.random()*1000)}`;
+            var m = String(raw).match(/\/d\/([^\/]+)\//);
+            if (m && m[1]) {
+                return "https://drive.google.com/uc?export=view&id=" + m[1];
+            }
+            return raw; // direct url
+        }
+
+        // Render news articles
+        function renderNews(news) {
+            newsGrid.innerHTML = '';
+
+            if (!news || news.length === 0) {
+                newsGrid.innerHTML = `<div class="no-results bangla-text" style="padding:40px;text-align:center;color:#666;">কোনো খবর পাওয়া যায়নি।</div>`;
+                return;
+            }
+
+            news.forEach((article, index) => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+
+                // date handling
+                let articleDate = article.date || article.timestamp || article.pub_date || '';
+                // try to format relative days
+                let dateText = '';
+                if (articleDate) {
+                    const d = new Date(articleDate);
+                    const today = new Date();
+                    const diffTime = Math.abs(today - d);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    dateText = diffDays === 1 ? '১ দিন আগে' : `${diffDays} দিন আগে`;
+                }
+
+                const imgUrl = safeImageUrl(article.image || article.image_url || article.image_drive_link, article.id || index+1);
+
+                const categoryText = article.category || article.section || 'সাধারণ';
+                const title = article.title || article.news_title || 'শিরোনাম নেই';
+                const excerpt = article.excerpt || (article.content ? (String(article.content).substring(0,120)+'...') : 'বিবরণ নেই');
+                const views = article.views ? Number(article.views).toLocaleString() : '0';
+
+                newsCard.innerHTML = `
+                    <div class="news-img" style="background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('${imgUrl}')"></div>
+                    <div class="news-content">
+                        <div class="news-category bangla-text">${escapeHtml(categoryText)}</div>
+                        <h3 class="news-title bangla-text">${escapeHtml(title)}</h3>
+                        <p class="news-excerpt bangla-text">${escapeHtml(excerpt)}</p>
+                        <div class="news-meta">
+                            <span class="bangla-date bangla-text"><i class="far fa-calendar"></i> ${escapeHtml(dateText)}</span>
+                            <span class="bangla-text"><i class="far fa-eye"></i> ${escapeHtml(views)} বার দেখা</span>
+                        </div>
+                    </div>
+                `;
+
+                newsGrid.appendChild(newsCard);
+            });
+        }
+
+        // tiny escape to avoid XSS
+        function escapeHtml(str) {
+            if (!str && str !== 0) return '';
+            return String(str)
+                    .replaceAll('&','&amp;')
+                    .replaceAll('<','&lt;')
+                    .replaceAll('>','&gt;')
+                    .replaceAll('"','&quot;')
+                    .replaceAll("'","&#039;");
+        }
+
+        // Fetch news from your Apps Script web app
+        async function loadNews() {
+            if (!API_URL || API_URL.includes('YOUR_APPS_SCRIPT')) {
+                console.warn('API_URL সেট করা হয়নি — আগে Apps Script Deploy করে URL এখানে বসান।');
+                newsGrid.innerHTML = `<div class="no-results bangla-text" style="padding:40px;text-align:center;color:#666;">API URL সঠিকভাবে সেট করা হয়নি।</div>`;
+                return;
+            }
+
+            try {
+                const res = await fetch(API_URL);
+                if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+                const data = await res.json();
+
+                // আপনি যদি Apps Script এ timestamp প্রথম কলামে রেখে থাকেন, ওই ফরম্যাটে data তৈরি করুন।
+                // data হওয়া উচিতঃ [ { title, excerpt, category, content, image, date, views }, ... ]
+
+                newsData = Array.isArray(data) ? data : [];
+                renderNews(newsData);
+            } catch (err) {
+                console.error('খবর লোড করতে সমস্যা হয়েছে:', err);
+                newsGrid.innerHTML = `<div class="no-results bangla-text" style="padding:40px;text-align:center;color:#666;">খবর লোড করতে সমস্যা: ${escapeHtml(err.message)}</div>`;
+            }
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Search functionality
+            document.getElementById('search-btn').addEventListener('click', performSearch);
+            document.getElementById('search-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            // Category filtering
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterNewsByCategory(button.textContent.trim());
+                });
+            });
+
+            // Article upload button: user should use Google Form. আমরা এখানে Form link open করবো (আপনি চাইলে Form URL বসিয়ে দিন)
+            uploadBtn.addEventListener('click', () => {
+                // যদি আপনি Google Form URL দিতে চান, এখানে বসান; নাহলে একটি নোট দেখাবে
+                const FORM_URL = '';
+                if (FORM_URL) window.open(FORM_URL, '_blank');
+                else alert('খবর আপলোড: অনুগ্রহ করে Google Form ব্যবহার করুন (Form URL configuration নেই)।');
+            });
+        }
+
+        // Search function
+        function performSearch() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) { renderNews(newsData); return; }
+
+            const q = query.toLowerCase();
+            const results = newsData.filter(article => 
+                String(article.title || '').toLowerCase().includes(q) ||
+                String(article.excerpt || '').toLowerCase().includes(q) ||
+                String(article.content || '').toLowerCase().includes(q) ||
+                String(article.category || '').toLowerCase().includes(q)
+            );
+
+            if (results.length) renderNews(results);
+            else newsGrid.innerHTML = `<div class="no-results bangla-text" style="padding:40px;text-align:center;color:#666;">"${escapeHtml(query)}" এর জন্য কোনো খবর পাওয়া যায়নি।</div>`;
+        }
+
+        // Category filtering
+        function filterNewsByCategory(category) {
+            if (category === 'সকল খবর') { renderNews(newsData); return; }
+            const filtered = newsData.filter(a => (a.category || '').trim() === category.trim());
+            renderNews(filtered);
+        }
+
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            loadNews();
+        });
+    </script>
+</body>
+</html>
