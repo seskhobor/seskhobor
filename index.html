@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>seskhobor - বাংলার প্রাণের সংবাদ</title>
+    <title>শেষ খবর - বাংলার প্রাণের সংবাদ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -491,12 +491,12 @@
         <div class="header-container">
             <div class="logo">
                 <i class="fas fa-newspaper"></i>
-                <span class="bangla-text">seskhobor</span>
+                <span class="bangla-text">শেষ খবর</span>
             </div>
             
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="খবর খুঁজুন...">
-                <button id="search-btn"><i class="fas fa-search"></i> অনুসন্ধান</button>
+                <button id="search-btn"><i class="fas fa-search"></i> খুঁজুন</button>
             </div>
             
             <nav>
@@ -617,7 +617,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-section">
-                <h3 class="bangla-text">seskhobor</h3>
+                <h3 class="bangla-text">শেষ খবর</h3>
                 <p class="bangla-text">বাংলার সেরা অনলাইন নিউজ পোর্টাল, যেখানে আপনি পাচ্ছেন সর্বশেষ ও নির্ভরযোগ্য খবর। আমাদের প্রতিশ্রুতি সত্য ও ন্যায়ভিত্তিক সাংবাদিকতা।</p>
             </div>
             
@@ -654,13 +654,13 @@
         </div>
         
         <div class="copyright bangla-text">
-            &copy; ২০২৫ seskhobor। সর্বস্বত্ব সংরক্ষিত।
+            &copy; ২০২৫ শেষ খবর। সর্বস্বত্ব সংরক্ষিত।
         </div>
     </footer>
     
     <script>
         // --- CONFIG: আপনার Apps Script Web App URL এখানে বসাবেন ---
-        const API_URL = "YOUR_APPS_SCRIPT_WEBAPP_URL_HERE"; // <-- **এখানে** আপনার Apps Script exec URL দিন
+        const API_URL = "https://script.google.com/macros/s/AKfycbyWRhne8RJbrlb3sfVr4pPHn7NADgy3obzC0sDCDZasqZcL5yyHRnqKZ4r1pLaue5t0Fw/exec";
 
         // local fallback (কাজ না করলে বা ডেভেলপমেন্টে) এমন sample থাকবে না — সবসময় API-ই রেন্ডার করবে
         let newsData = [];
@@ -786,10 +786,9 @@
 
             // Article upload button: user should use Google Form. আমরা এখানে Form link open করবো (আপনি চাইলে Form URL বসিয়ে দিন)
             uploadBtn.addEventListener('click', () => {
-                // যদি আপনি Google Form URL দিতে চান, এখানে বসান; নাহলে একটি নোট দেখাবে
-                const FORM_URL = '';
-                if (FORM_URL) window.open(FORM_URL, '_blank');
-                else alert('খবর আপলোড: অনুগ্রহ করে Google Form ব্যবহার করুন (Form URL configuration নেই)।');
+                // Google Form URL
+                const FORM_URL = "https://docs.google.com/forms/d/1bauiKGE3yTVjA8OedkbWjhRp4-UAdJDQTakzoxGiIyA/viewform";
+                window.open(FORM_URL, '_blank');
             });
         }
 
